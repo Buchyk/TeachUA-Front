@@ -3,6 +3,7 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import './css/AutoComplete.css'
 
 const MapAutoComplete = () => {
+    const [value, setValue] = useState(null);
   //  const [request, setRequest] = useState("");
 
     const handleSelect = address => {

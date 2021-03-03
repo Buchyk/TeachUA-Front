@@ -1,22 +1,22 @@
 import React from "react";
-import AboutHeader from "./MainHeader";
-import MainCarousel from "./MainCarousel";
+import AboutHeader from "./AboutHeader";
+import AboutCarousel from "./AboutCarousel";
 import {Button, Layout} from "antd";
-import MainDescription from "./MainDescription";
-import MainChallenge from "./MainChallenge";
+import AboutDescription from "./AboutDescription";
+import AboutChallenge from "./AboutChallenge";
 
 import {items} from "./carousel/CarouselItems";
-import MainCategories from "./MainCategories";
-import AboutNews from "./MainNews";
+import AboutCategories from "./AboutCategories";
+import AboutNews from "./AboutNews";
 import {ROOT_URI} from "../../config/ApplicationConfig";
 
-const MainComponent = () => {
+const AboutComponent = () => {
     return (
         <Layout>
             <AboutHeader/>
-            <MainCarousel items={items}/>
-            <MainDescription/>
-            <MainChallenge
+            <AboutCarousel items={items}/>
+            <AboutDescription/>
+            <AboutChallenge
                 label='Про челендж "Навчай українською"'
                 text='Ми допоможемо вам перейти на українську мову викладання.
                 Тут ви можете знайти мотиваційні та практичні вебінари з експертами,
@@ -24,9 +24,9 @@ const MainComponent = () => {
                 imageUrl={`${ROOT_URI}/static/images/about/challenge.png`}
                 buttonLabel="Переглянути матеріали"
             />
-            <MainCategories/>
+            <AboutCategories/>
             <AboutNews/>
-            <MainChallenge
+            <AboutChallenge
                 label='Челендж "Навчай українською"'
                 text='Близько тисячі учасників з усієї України уже взяли участь у 21-денному челенджі
                 "Навчай українською" для закладів позашкільної освіти, які переходять на українську мову навчання.
@@ -39,4 +39,4 @@ const MainComponent = () => {
     );
 };
 
-export default MainComponent;
+export default AboutComponent;

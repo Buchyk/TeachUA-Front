@@ -3,6 +3,7 @@ import {searchParameters} from "../../../context/SearchContext";
 import PrimitiveCard from "../../PrimitiveCard";
 import './css/SimilarClubs.css';
 import PropTypes from "prop-types";
+import {ROOT_URI} from "../../../config/ApplicationConfig";
 
 const SimilarClubs = ({similarClubs}) => {
     return (
@@ -11,7 +12,7 @@ const SimilarClubs = ({similarClubs}) => {
             {similarClubs.map(club => <PrimitiveCard key={club.id}
                                                      header={<div className="name">{club.name}</div>}
                                                      description={club.description}
-                                                     link={`/club/${club.id}`}
+                                                     link={`${ROOT_URI}/club/${club.id}`}
                                                      buttonText="Детальніше"/>)}
         </div>)
 };

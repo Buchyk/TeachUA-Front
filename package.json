@@ -4,13 +4,13 @@
   "private": true,
   "homepage": "http://localhost:8080/dev",
   "dependencies": {
-    "@ant-design/icons": "^4.5.0",
-    "@craco/craco": "^6.1.0",
+    "@ant-design/icons": "^4.4.0",
+    "@craco/craco": "^6.1.1",
     "@react-google-maps/api": "^2.1.1",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
-    "@testing-library/user-event": "^12.7.2",
-    "antd": "^4.12.3",
+    "@testing-library/user-event": "^12.6.0",
+    "antd": "^4.11.2",
     "axios": "^0.21.1",
     "craco-less": "^1.17.1",
     "prop-types": "^15.7.2",
@@ -45,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
   }
 }

@@ -8,7 +8,7 @@ import {Button, Layout, Pagination} from "antd";
 import {searchParameters} from "../../context/SearchContext";
 import {Link} from "react-router-dom";
 
-const MainCategories = () => {
+const AboutCategories = () => {
     const [categories, setCategories] = useState({
         content: [],
         size: 0
@@ -66,4 +66,4 @@ const MainCategories = () => {
     );
 };
 
-export default MainCategories;
+export default AboutCategories;

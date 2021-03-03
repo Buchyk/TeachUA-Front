@@ -1,34 +1,20 @@
 import React, {useState} from 'react';
-import {Button, Form, message, Modal, Switch} from 'antd';
-import './сss/Registration.less';
+import {Button, Modal, Switch} from 'antd';
+import './Registration.less';
 import RegistrationRoles from "./RegistrationRoles";
 import RegistrationSocial from "./RegistrationSocial";
 import RegistrationInput from "./RegistrationInput";
-import {registerUser} from "../../service/UserService";
 
 
 const Registration = () => {
     const [visible, setVisible] = useState(false);
     const [disabledButton, setDisabledButton] = useState(true);
 
-    const onFinish = (values) => {
-        registerUser(values).then((response) => {
-            if(response.status) {
-                message.error(response.message);
-            }
-            else {
-                message.success("Ви успішно зареєструвались!");
-                setVisible(false);
-            }
-        });
-    };
-
-
     return (
         <>
-            <span type="text" onClick={() => setVisible(true)}>
+            <Button type="" onClick={() => setVisible(true)}>
                 Зареєструватися
-            </span>
+            </Button>
             <Modal
                 className="modal-registration"
                 centered
@@ -42,16 +28,9 @@ const Registration = () => {
                     Реєстрація
                 </div>
                 <div className="registration-content">
-                    <Form
-                        name="basic"
-                        requiredMark={false}
-                        onFinish={onFinish}
-                    >
-                        <RegistrationRoles setDisabledButton={setDisabledButton}
-                                           disabledButton={disabledButton}/>
-                        <RegistrationSocial/>
-                        <RegistrationInput disabledButton={disabledButton}/>
-                    </Form>
+                    <RegistrationRoles setDisabledButton={setDisabledButton} disabledButton={disabledButton}/>
+                    <RegistrationSocial/>
+                    <RegistrationInput disabledButton={disabledButton}/>
                 </div>
             </Modal>
         </>

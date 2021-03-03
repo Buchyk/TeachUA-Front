@@ -4,7 +4,7 @@ import './css/AboutCarousel.css';
 import ArrowLeftOutlined from "@ant-design/icons/lib/icons/ArrowLeftOutlined";
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
 
-const MainCarousel = (items) => {
+const AboutCarousel = (items) => {
     const carousel = useRef(null);
 
     return (
@@ -25,4 +25,4 @@ const MainCarousel = (items) => {
     );
 };
 
-export default MainCarousel;
+export default AboutCarousel;

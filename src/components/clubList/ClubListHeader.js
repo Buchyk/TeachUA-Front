@@ -17,7 +17,7 @@ const ClubListHeader = () => {
                     <EnvironmentFilled className="icon"/>
                 </div>
                 <Button className="flooded-button show-map-button"
-                        onClick={() => setMapVisible(true)}>Показати на мапі</Button>
+                        onClick={() => setMapVisible(true)}>Показати на карті</Button>
             </div>
             <Search/>
             <MapComponent visible={mapVisible} setVisible={setMapVisible}/>
