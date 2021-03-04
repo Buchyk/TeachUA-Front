@@ -21,7 +21,6 @@ pipeline {
             steps {
                 echo 'Build our front'
                 sh 'npm run build'
-                archiveArtifacts artifacts: 'build/build.zip'
             }
         }
     stage('DeployToStaging') {
@@ -42,11 +41,11 @@ pipeline {
                                 ], 
                                 transfers: [
                                     sshTransfer(
-                                        sourceFiles: 'build/build.zip',
-                                        removePrefix: 'build/',
-                                        remoteDirectory: '/app',
+                                        sourceFiles: 'build/',
+                                   //     removePrefix: 'build/',
+                                        remoteDirectory: '/home/teachua/www/front/'
                                        //  execCommand: 'sudo mv /home/teachua/www/back/TeachUA-1.0.war /home/teachua/www/back/dev.war' 
-                                       execCommand: 'sudo rm -rf /home/teachua/www/front/* && unzip /app/build.zip -d /home/teachua/www/front && sudo docker restart apache_prod'
+                                    //   execCommand: 'sudo rm -rf /home/teachua/www/front/* && unzip /app/build.zip -d /home/teachua/www/front && sudo docker restart apache_prod'
                                     )
                                 ]
                             )
