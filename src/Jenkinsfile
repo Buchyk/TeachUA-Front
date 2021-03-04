@@ -1,15 +1,27 @@
 pipeline {
     agent {
         docker {
-            image 'maven:3-openjdk-8' 
-            args '-v /root/.m2:/root/.m2' 
+            image 'node:6-alpine' 
         }
     }
     stages {
-        stage('Build') { 
+        stage('NPM Clear cache') { 
             steps {
-                echo 'Running build automation'
-                sh 'mvn -B -DskipTests clean package' 
+                echo 'Clear cache for npm'
+                sh 'npm cache clean --force' 
+            }
+        }
+        stage('Install all dependencies') { 
+            steps {
+                echo 'Install all dependencies which was declarate in package.json'
+                sh 'npm install' 
+            }
+        }
+        stage('Build our app') { 
+            steps {
+                echo 'Build our front'
+                sh 'npm run build'
+                archiveArtifacts artifacts: 'build/build.zip'
             }
         }
     stage('DeployToStaging') {
@@ -17,7 +29,7 @@ pipeline {
                 branch 'main'
             }
             steps {
-                withCredentials([usernamePassword(credentialsId: 'backend', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'frontend', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                     sshPublisher(
                         failOnError: true,
                         continueOnError: false,
@@ -30,11 +42,11 @@ pipeline {
                                 ], 
                                 transfers: [
                                     sshTransfer(
-                                        sourceFiles: 'target/TeachUA-1.0.war',
-                                        removePrefix: 'target/',
-                                        remoteDirectory: '/home/teachua/www/back',
-                                         execCommand: 'sudo mv /home/teachua/www/back/TeachUA-1.0.war /home/teachua/www/back/dev.war' 
-                                        //                                        execCommand: 'sudo /usr/bin/systemctl stop train-schedule && rm -rf /opt/train-schedule/* && unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo /usr/bin/systemctl start train-schedule'
+                                        sourceFiles: 'build/build.zip',
+                                        removePrefix: 'build/',
+                                        remoteDirectory: '/app',
+                                       //  execCommand: 'sudo mv /home/teachua/www/back/TeachUA-1.0.war /home/teachua/www/back/dev.war' 
+                                       execCommand: 'sudo rm -rf /home/teachua/www/front/* && unzip /app/build.zip -d /home/teachua/www/front && sudo docker restart apache_prod'
                                     )
                                 ]
                             )
