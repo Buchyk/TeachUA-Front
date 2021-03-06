@@ -41,7 +41,6 @@ pipeline {
                                     sshTransfer(
                                         sourceFiles: 'build-${BUILD_NUMBER}.tar.gz',
                                         remoteDirectory: '/front_artifactory',
-                                        
                                     )
                                 ]
                             )
@@ -69,7 +68,7 @@ pipeline {
                                 transfers: [
                                     sshTransfer(
                                         sourceFiles: 'build/',
-                                        remoteDirectory: '/home/teachua/www/front/'
+                                        remoteDirectory: '/home/teachua/www/front/',
                                          execCommand: 'sudo docker restart apache_prod'
                                     )
                                 ]
