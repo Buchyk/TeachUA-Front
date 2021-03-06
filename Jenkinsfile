@@ -21,6 +21,33 @@ pipeline {
             steps {
                 echo 'Build our front'
                 sh 'npm run build'
+                sh 'tar czf build-${BUILD_NUMBER}.tar.gz build/'
+            }
+        }
+        stage('Push to artifact server') { 
+             steps {
+                withCredentials([usernamePassword(credentialsId: 'artifact', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
+                    sshPublisher(
+                        failOnError: true,
+                        continueOnError: false,
+                        publishers: [
+                            sshPublisherDesc(
+                                configName: 'artifact_server',
+                                sshCredentials: [
+                                    username: "$USERNAME",
+                                    encryptedPassphrase: "$USERPASS"
+                                ], 
+                                transfers: [
+                                    sshTransfer(
+                                        sourceFiles: 'build-${BUILD_NUMBER}.tar.gz',
+                                        remoteDirectory: '/front_artifactory',
+                                        
+                                    )
+                                ]
+                            )
+                        ]
+                    )
+                }
             }
         }
     stage('DeployToStaging') {
@@ -42,9 +69,8 @@ pipeline {
                                 transfers: [
                                     sshTransfer(
                                         sourceFiles: 'build/',
-                                   //     removePrefix: 'build/',
                                         remoteDirectory: '/home/teachua/www/front/'
-                                       //  execCommand: 'sudo mv /home/teachua/www/back/TeachUA-1.0.war /home/teachua/www/back/dev.war' 
+                                        execCommand: 'sudo docker restart apache_prod' 
                                     //   execCommand: 'sudo rm -rf /home/teachua/www/front/* && unzip /app/build.zip -d /home/teachua/www/front && sudo docker restart apache_prod'
                                     )
                                 ]
