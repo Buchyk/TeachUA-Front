@@ -70,8 +70,7 @@ pipeline {
                                     sshTransfer(
                                         sourceFiles: 'build/',
                                         remoteDirectory: '/home/teachua/www/front/'
-                                         execCommand: 'sudo docker restart apache_prod' 
-                                    //   execCommand: 'sudo rm -rf /home/teachua/www/front/* && unzip /app/build.zip -d /home/teachua/www/front && sudo docker restart apache_prod'
+                                         execCommand: 'sudo docker restart apache_prod'
                                     )
                                 ]
                             )
